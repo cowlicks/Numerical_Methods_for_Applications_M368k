@@ -6,14 +6,14 @@ Outputs: x^(k), iteration count k
 
 Here's how to get started:
 
-1) Copy program1.cpp (this file), jacobi.cpp, 
+1) Copy program2.cpp (this file), gauss_seidel.cpp, 
 matrix.cpp and matrix.h into your working directory.
 
 2) Compile (and link) the files by typing
-"c++ -o program1 matrix.cpp jacobi.cpp program1.cpp"
+"c++ -o program2 matrix.cpp gauss_seidel.cpp program2.cpp"
 at the Linux prompt.
 
-3) Type "program1" to run the program.
+3) Type "program2" to run the program.
 
 4) For any given problem, you'll need to set the 
 values of the variables {n,A,b,x,maxIter,tol} below, 
@@ -26,7 +26,7 @@ and then compile and run as described above.
 using namespace std;
 
 /*** Declare user-defined functions to be used ***/
-int jacobi(matrix&, vector&, vector&, int, double);
+int gauss_seidel(matrix&, vector&, vector&, int, double);
 
 
 /*** Main program ***/
@@ -56,7 +56,7 @@ int main() {
 
 
   /*** Call Jacobi function ***/
-  iter=jacobi(A,b,x,maxIter,tol);
+  iter=gauss_seidel(A,b,x,maxIter,tol);
   
 
   /*** Print results to screen ***/
