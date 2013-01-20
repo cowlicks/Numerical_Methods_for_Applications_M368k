@@ -49,11 +49,15 @@ int gauss_seidel(matrix& A, vector& b, vector& x,
 
   while(iter<maxIter && error>=tol) {
     for(int i=0; i<n; i++) {
-      double sum = 0;
-      for(int j=0; j<n; j++) {
-	    if(j!=i) sum += A(i,j)*xold(j);
+      double sum_old = 0;
+      double sum_new = 0;
+      for(int j=0; j<i; j++) {
+          sum_new += A(i,j)*x(j);
       }
-      x(i) = ( -sum + b(i) ) / A(i,i);
+      for(int j=i+1; j<n; j++) {
+          sum_old += A(i,j)*xold(j);
+      }
+      x(i) = ( -sum_new -sum_old + b(i) ) / A(i,i);
     }
     r = b - matVecMult(A,x);
     error = vecMaxNorm(r);
