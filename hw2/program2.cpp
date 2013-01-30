@@ -43,15 +43,31 @@ int conjgrad(matrix&, matrix&, vector&, vector&, int, double);
 int main() {
 
   /*** Define and input problem data ***/
-  int n=3, maxIter=500, iter;
+  int n=100, maxIter=500, iter;
   double tol=1e-5, w=1.2;
   matrix Cinv(n,n), A(n,n);
   vector x(n), b(n);
 
-  A(0,0)= 3; A(0,1)=-1; A(0,2)= 1; b(0)=1;
-  A(1,0)=-1; A(1,1)= 6; A(1,2)= 2; b(1)=0;
-  A(2,0)= 1; A(2,1)= 2; A(2,2)= 7; b(2)=4;
-
+  /*** Constuct the given matrix ***/
+  for(float i=0; i<n; i++) {
+      for(float j=0; j<n; j++) {
+          if(j==i-1) {
+              A(i,j)=-1;
+          }
+          else if(j==i) {
+              A(i,j)=2+(i/10);
+          }
+          else if(j==i+1) {
+              A(i,j)=-1;
+          }
+          else {
+              A(i,j)=0;
+          }
+      }
+  }
+  for(float i=0; i<n; i++) {
+      b(i)=1+(i/20);
+  }
 
   x=0; //initialize  x
 
@@ -74,8 +90,10 @@ int main() {
   /*** Print results to screen ***/
   cout << endl; 
   cout << "Iteration index: k = " << iter << endl;
-  cout << "Approximate solution: x^(k) = " << endl;
-  cout << x << endl;
+  cout << "Approximate solution components of x^(k); x_1, ... , x_4 = " << endl;
+  for(int i=0; i<4; i++) {
+      cout << x(i) << endl;
+  }
 
   return 0;
 }
