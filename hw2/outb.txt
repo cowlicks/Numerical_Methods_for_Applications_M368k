@@ -1,0 +1,8 @@
+CG: solution converged, |r|_inf = 9.86047e-06
+
+Iteration index: k = 16
+Approximate solution components of x^(k); x_1, ... , x_4 = 
+2.03612
+3.07223
+3.36558
+3.23203
