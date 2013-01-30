@@ -48,7 +48,7 @@ int main() {
   matrix Cinv(n,n), A(n,n);
   vector x(n), b(n);
 
-  /*** Constuct the given matrix ***/
+  /*** Constuct the data ***/
   for(float i=0; i<n; i++) {
       for(float j=0; j<n; j++) {
           if(j==i-1) {
