@@ -1,0 +1,70 @@
+CG: solution converged, |r|_inf = 9.86047e-06
+
+Conjugate gradient with Cinv = D^.5
+Iteration index: k = 16
+Approximate solution components of x^(k); x_1, ... , x_4 = 
+2.03612
+3.07223
+3.36558
+3.23203
+
+Jacobi: solution converged, |r|_inf = 9.55779e-06
+
+Jacobi
+Iteration index: k = 61
+Approximate solution components of x^(k); x_1, ... , x_4 = 
+2.0361
+3.07221
+3.36555
+3.23201
+
+Gauss-Seidel: solution converged, |r|_inf = 7.85612e-06
+
+Gauss Seidel
+Iteration index: k = 33
+Approximate solution components of x^(k); x_1, ... , x_4 = 
+2.03611
+3.07222
+3.36556
+3.23202
+
+SOR: solution converged, |r|_inf = 8.67588e-06
+
+SOR w = 1.2
+Iteration index: k = 20
+Approximate solution components of x^(k); x_1, ... , x_4 = 
+2.03611
+3.07222
+3.36557
+3.23203
+
+SOR: solution converged, |r|_inf = 9.79155e-06
+
+SOR w = 1.6
+Iteration index: k = 29
+Approximate solution components of x^(k); x_1, ... , x_4 = 
+2.03612
+3.07224
+3.36558
+3.23203
+
+SOR: max iterations exceeded
+
+SOR w = 2.3
+Iteration index: k = 500
+Approximate solution components of x^(k); x_1, ... , x_4 = 
+9.38284e+56
+1.56318e+57
+1.97932e+57
+1.58132e+57
+
+CG: solution converged, |r|_inf = 7.69108e-06
+
+CG with Cinv = I 
+Iteration index: k = 29
+Approximate solution components of x^(k); x_1, ... , x_4 = 
+2.03612
+3.07223
+3.36558
+3.23204
+
