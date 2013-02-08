@@ -33,7 +33,9 @@ and run.
 using namespace std;
 
 /*** Declare user-defined functions to be used ***/
-double poly(vector&, int, double); // defined below
+double poly(vector&, int, double); // defined below 
+double pwrsum(vector&, double);
+double bsum(vector&, vector&, double);
 int gauss_elim(matrix&, vector&, vector&);
 
 
@@ -63,10 +65,15 @@ int main() {
   A=0 ; b=0 ; // initialize for sum
 
 
-
-           /*(Need to build A,b here)*/
-
-
+  // Create A and b.
+  for(int i=0; i<=n; i++) {
+      for( int j=0; j<=n; j++) {
+          A(i,j) = pwrsum(x, i+j);
+      }
+  }
+  for(int i=0; i<=n; i++) {
+      b(i) = bsum(x, y, i);
+  }
 
   /*** Print least-squares arrays to screen ***/
   cout << endl;
@@ -104,3 +111,20 @@ double poly(vector& alpha, int n, double x) {
   return P;
 }
 
+// Functions for constructing A.
+double pwrsum(vector& x, double deg) {
+  double sum=0;
+  for(int i=0; i<dim(x); i++) {
+      sum+=pow(x(i), deg);
+  }
+  return sum;
+}
+
+// Functions for constructing b.
+double bsum(vector& x, vector& y, double deg) {
+  double sum=0;
+  for(int i=0; i<dim(x); i++) {
+      sum+=y(i)*pow(x(i), deg);
+  }
+  return sum;
+}
