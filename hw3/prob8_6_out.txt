@@ -1,0 +1,48 @@
+## Output
+exp_a = 2.70729468691, exp_b = 0.0457074806953
+pwr_a = 1.87200928433, pwr_b = 0.0457074806953
+
+## Code to do the problem.
+import math
+x = [.2, .3, .6, .9, 1.1, 1.3, 1.4, 1.6]
+y = [0.050446, 0.098426, 0.33277, 0.72660, 1.0972, 1.5697, 1.8487, 2.5015]
+
+x_log = [ math.log(i) for i in x ]
+y_log = [ math.log(i) for i in y ]
+
+def pwrsum(x, deg):
+    sum = 0
+    for i in x:
+        sum += i**deg
+    return sum
+def dblsum(x,y):
+    sum = 0
+    for i in range(len(x)):
+        sum += x[i]*y[i]
+    return sum
+
+def a0_coef(x, y):
+    numerator = pwrsum(x, 2)*pwrsum(y,1) - dblsum(x,y)*pwrsum(x,1)
+    denomenator = len(x)*pwrsum(x,2) - pwrsum(x,1)**2
+    return numerator/denomenator
+
+def a1_coef(x,y):
+    numerator = len(x)*dblsum(x,y) - pwrsum(x,1)*pwrsum(y,1)
+    denomenator = len(x)*pwrsum(x,2) - pwrsum(x,1)**2
+    return numerator/denomenator
+
+def main():
+    # Calc the exp fit.
+    exp_lnb = a0_coef(x, y_log)
+    exp_a   = a1_coef(x, y_log)
+    exp_b   = math.exp(exp_lnb)
+    print "exp_a = {}, exp_b = {}".format(exp_a, exp_b)
+
+    # Calc the pwr fit.
+    pwr_lnb = a0_coef(x_log, y_log)
+    pwr_a   = a1_coef(x_log, y_log)
+    pwr_b   = math.exp(exp_lnb)
+    print "pwr_a = {}, pwr_b = {}".format(pwr_a, pwr_b)
+
+if __name__ == '__main__':
+    main()

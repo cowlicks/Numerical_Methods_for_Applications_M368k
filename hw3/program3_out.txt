@@ -1,0 +1,67 @@
+Enter polynomial degree: 
+Least-squares degree: n = 
+1
+
+Least-squares array: A = 
+11  5.37  
+5.37  3.9169  
+
+Least-squares array: b = 
+24.9824
+15.1234
+
+Least-squares solution: alpha^(k) = 
+1.16786
+2.25996
+
+Least-squares fitting error: E = 
+1.98708
+
+#######################
+Enter polynomial degree: 
+Least-squares degree: n = 
+2
+
+Least-squares array: A = 
+11  5.37  3.9169  
+5.37  3.9169  3.2094  
+3.9169  3.2094  2.77595  
+
+Least-squares array: b = 
+24.9824
+15.1234
+11.4621
+
+Least-squares solution: alpha^(k) = 
+0.576696
+6.71764
+-4.45122
+
+Least-squares fitting error: E = 
+0.360735
+
+#######################
+Enter polynomial degree: 
+Least-squares degree: n = 
+3
+
+Least-squares array: A = 
+11  5.37  3.9169  3.2094  
+5.37  3.9169  3.2094  2.77595  
+3.9169  3.2094  2.77595  2.47758  
+3.2094  2.77595  2.47758  2.25808  
+
+Least-squares array: b = 
+24.9824
+15.1234
+11.4621
+9.51555
+
+Least-squares solution: alpha^(k) = 
+0.308743
+10.9645
+-15.5472
+7.35464
+
+Least-squares fitting error: E = 
+0.0287736
