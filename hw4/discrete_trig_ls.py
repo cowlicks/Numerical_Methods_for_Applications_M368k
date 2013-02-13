@@ -13,7 +13,7 @@ def xj_list(m, low_bound=-math.pi, up_bound=math.pi):
     """
     Return the list of xj's. By default the domain is [-pi, pi].
     """
-    return [ low_bound + (float(j)/m)*up_bound for j in range(1*m) ]
+    return [ low_bound + (float(j)/m)*up_bound for j in range(2*m) ]
 
 def yj_list(f, xj_list):
     """
@@ -39,7 +39,7 @@ def bk_list(xj_list, yj_list, m, n):
     """
     Similar to ak_list function but for the b constants.
     """
-    bk_list = []
+    bk_list = [0]
     for k in range(1, n):
         summation = 0
         for j in range(2*m):
@@ -47,7 +47,7 @@ def bk_list(xj_list, yj_list, m, n):
         bk_list.append(summation / m)
     return bk_list
 
-def S_trig_poly(x, n, ak_list, bk_list):
+def s_trig_poly(x, n, ak_list, bk_list):
     """
     Given the a and b constants, construct the least squares trig
     approximation.
@@ -55,7 +55,7 @@ def S_trig_poly(x, n, ak_list, bk_list):
     summation = 0
     for k in range(1, n):
         summation += ak_list[k] * math.cos(k*x) + bk_list[k] * math.sin(k*x)
-    return .5*ak_list[0] + ak_list[-1]*cos(n*x) + summation
+    return .5*ak_list[0] + ak_list[-1]*math.cos(n*x) + summation
 
 if __name__=='__main__':
     pass
