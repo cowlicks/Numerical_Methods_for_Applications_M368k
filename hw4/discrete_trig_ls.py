@@ -47,15 +47,32 @@ def bk_list(xj_list, yj_list, m, n):
         bk_list.append(summation / m)
     return bk_list
 
-def s_trig_poly(x, n, ak_list, bk_list):
+def s_trig_poly(line, n, ak_list, bk_list):
     """
     Given the a and b constants, construct the least squares trig
     approximation.
     """
-    summation = 0
-    for k in range(1, n):
-        summation += ak_list[k] * math.cos(k*x) + bk_list[k] * math.sin(k*x)
-    return .5*ak_list[0] + ak_list[-1]*math.cos(n*x) + summation
+    data = []
+    for x in line:
+        summation = 0
+        if n+1 != len(ak_list):
+            for k in range(1, n):
+                summation += ak_list[k] * math.cos(k*x) + bk_list[k] * math.sin(k*x)
+            data.append(.5*ak_list[0] + ak_list[-1]*math.cos(n*x) + summation)
+        else:
+            for k in range(1, n):
+                summation += ak_list[k] * math.cos(k*x) + bk_list[k] * math.sin(k*x)
+            data.append(.5*(ak_list[0] + ak_list[-1]*math.cos(n*x))*summation)
+    return data
+
+def main(t, f, m, n=None, low=-math.pi, high=math.pi):
+    if n is None: 
+        n = m
+    xl = xj_list(m)
+    yl = yj_list(f, xl)
+    al = ak_list(xl, yl, m, n)
+    bl = bk_list(xl, yl, m, n)
+    return s_trig_poly(t, n, al, bl)
 
 if __name__=='__main__':
     pass
