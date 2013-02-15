@@ -26,6 +26,15 @@ and then compile and run.
 using namespace std;
 
 
+// S_n function
+double S_n(double x, vector& a, vector& b, int n) {
+    double sum = 0;
+    for(int k=1; k<=n-1; k++) {
+        sum += a(k)*cos(k*x) + b(k-1)*cos(k*x);
+    }
+    sum += 0.5*a(0) + a(n)*cos(n*x);
+}
+
 /*** Specify name of input data file ***/
 const int maxChar = 20;
 const char myfile[maxChar]="program4.dat" ;
@@ -50,6 +59,7 @@ int main() {
   cout << "Number of data points 2m: " << 2*m << endl;
   cout << endl;
 
+
   /*** Compute a,b-coefficients ***/
   int n; 
   cout << "Enter trig poly degree n: " << flush;
@@ -62,11 +72,15 @@ int main() {
   vector a(n+1), b(n-1);
   a = 0 ; b = 0 ; // initialize for sum
 
-
-
-           /*(Need to compute a,b coeffs here)*/
-
-
+  // compute a(0) and a(n+1) first.
+  for(int k=0; k<=n ; k++) {
+      for(int j=0; j<=2*m-1; j++) {
+          a(k) += y(j)*cos(k*x(j)) /m;
+          if(k != 0 && k != n) {
+              b(k-1) += y(j)*sin(k*x(j)) /m;
+          }
+      }
+  }
 
   /*** Print least-squares coeffs to screen ***/
   cout << endl;
@@ -79,8 +93,13 @@ int main() {
 
   /*** Compute least-squares fitting error ***/
   double E = 0;
+  double val = S_n(.1, a, b, n);
+  cout << "dongs" << endl;
+  cout << val << endl;
 
-
+  for(int i=0; i<dim(x); i++) {
+      E += pow((y(i) - S_n(x(i), a, b, n)),2);
+  }
            /*(Need to compute error E here)*/
 
 
