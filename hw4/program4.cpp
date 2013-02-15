@@ -30,9 +30,11 @@ using namespace std;
 double S_n(double x, vector& a, vector& b, int n) {
     double sum = 0;
     for(int k=1; k<=n-1; k++) {
-        sum += a(k)*cos(k*x) + b(k-1)*cos(k*x);
+        sum += a(k)*cos(k*x) + b(k-1)*sin(k*x);
+
     }
     sum += 0.5*a(0) + a(n)*cos(n*x);
+    return sum;
 }
 
 /*** Specify name of input data file ***/
@@ -93,13 +95,11 @@ int main() {
 
   /*** Compute least-squares fitting error ***/
   double E = 0;
-  double val = S_n(.1, a, b, n);
-  cout << "dongs" << endl;
-  cout << val << endl;
 
   for(int i=0; i<dim(x); i++) {
       E += pow((y(i) - S_n(x(i), a, b, n)),2);
   }
+
            /*(Need to compute error E here)*/
 
 
