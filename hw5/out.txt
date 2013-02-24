@@ -1,0 +1,43 @@
+
+***Input data details***
+
+Data file: program5.dat
+Number of data points: m = 100
+
+***Results for mu and A***
+
+Mean vector mu = 
+1.89664
+1.94386
+1.15752
+3.95281
+
+Covariance matrix A = 
+2.33291  0.436089  -0.47099  -0.307872  
+0.436089  2.19321  1.1283  -0.0556413  
+-0.47099  1.1283  2.53626  1.20447  
+-0.307872  -0.0556413  1.20447  1.38376  
+
+***Results for power method***
+
+Given: A = 
+2.33291  0.436089  -0.47099  -0.307872  
+0.436089  2.19321  1.1283  -0.0556413  
+-0.47099  1.1283  2.53626  1.20447  
+-0.307872  -0.0556413  1.20447  1.38376  
+
+Given: x^(0) = 
+1
+1
+1
+1
+
+Gen power: soln converged, |r|_inf = 7.54031e-05
+Iteration index: k = 24
+Approximate eigval: lambda^(k) = 3.90152
+Approximate eigvec: x^(k) = 
+-0.234514
+0.584649
+1
+0.494113
+
