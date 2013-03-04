@@ -50,7 +50,17 @@ int qr(matrix& A, matrix& Q, matrix& D,
     for(int i=1; i<n; i++){
       P  = Eye ; 
       Pt = Eye ;
+      double theta=atan(B(i,i-1)/B(i-1,i-1));
 
+      P(i-1, i-1)   = cos(theta);
+      P(i-1, i)     = sin(theta);
+      P(i, i-1)     = -sin(theta);
+      P(i, i)       = cos(theta);
+
+      Pt(i-1, i-1)  = P(i-1, i-1);
+      Pt(i, i)      = P(i, i);
+      Pt(i, i-1)    = P(i-1, i);
+      Pt(i-1, i)    = P(i, i-1);
 
       /*** build the cosine and sine entries of P and 
            its transpose Pt to create a zero at entry 
