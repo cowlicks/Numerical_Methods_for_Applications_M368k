@@ -40,31 +40,79 @@ int newton(vector&, int, int, double) ;
 
 /*** Define F function for problem ***/
 void Feval(vector& x, vector& F){
-  double a=1, b=-0.3 ; //define any constants
+  double a=3.0, b=1.5, c=1.0, d=2.0, h=3.5, r=2.5 ; //define any constants
   double pi=4.0*atan(1.0) ; //the number pi
 
-  F(0) = -x(0) + x(1)/6.0 + x(0)*x(0)/3.0 ;
-  F(1) = -x(1) + x(0)/4.0 + x(1)*x(1)/16.0  + 1.0/8.0 ;
+  F(0) = pow(x(2),2) / pow(a,2) + pow(x(3), 2) / pow(b,2) - 1.0 ; 
+  F(1) = pow(x(4),2) / pow(c,2) + pow(x(5) + h,2) / pow(d,2) ;
+  F(2) = pow(x(2) - x(0),2) + pow(x(3) - x(1),2) - pow(r,2) ;
+  F(3) = pow(x(4) - x(0),2) + pow(x(5) - x(1),2) - pow(r,2) ;
+  F(4) = x(2)*(x(3) - x(1))*pow(b,2) - x(3)*(x(2) - x(0))*pow(a,2) ;
+  F(5) = x(4)*(x(5) - x(1))*pow(d,2) - (x(5) + h)*(x(4) - x(0))*pow(c,2) ;
 }
 
 /*** Define DF function (Jacobian) for problem ***/
 void DFeval(vector& x, matrix& DF){
-  double a=1, b=-0.3 ; //define any constants
+  double a=3.0, b=1.5, c=1.0, d=2.0, h=3.5, r=2.5 ; //define any constants
   double pi=4.0*atan(1.0) ; //the number pi
 
-  DF(0,0) = -1.0 + 2.0*x(0)/3.0 ;  
-  DF(0,1) =  1.0/6.0 ;
-  DF(1,0) =  1.0/4.0 ;  
-  DF(1,1) = -1.0 + x(1)/8.0 ;
+  DF(0,0) = 0 ;
+  DF(0,1) = 0 ;
+  DF(0,2) = 2*x(2)/pow(a,2) ;
+  DF(0,3) = 2*x(3)/pow(b,2) ;
+  DF(0,4) = 0 ;
+  DF(0,5) = 0 ;
+
+  DF(1,0) = 0 ;
+  DF(1,1) = 0 ;
+  DF(1,2) = 0 ;
+  DF(1,3) = 0 ;
+  DF(1,4) = 2*x(4)/pow(c,2) ;
+  DF(1,5) = 2*(x(5) + h)/pow(d,2) ;
+
+  DF(2,0) = 2*(x(2) - x(0)) ;
+  DF(2,1) = 2*(x(3) - x(1)) ; 
+  DF(2,2) = 2*(x(2) - x(0)) ; 
+  DF(2,3) = 2*(x(3) - x(1)) ; 
+  DF(2,4) = 0 ;
+  DF(2,5) = 0 ;
+
+  DF(3,0) = 2*(x(4) - x(0)) ;
+  DF(3,1) = 2*(x(5) - x(1)) ;
+  DF(3,2) = 0 ;
+  DF(3,3) = 0 ;
+  DF(3,4) = 2*(x(4) - x(0)) ;
+  DF(3,5) = 2*(x(5) - x(1)) ;
+
+  DF(4,0) = x(3)*pow(a,2) ;
+  DF(4,1) = -x(2)*pow(b,2) ;
+  DF(4,2) = (x(3) - x(1))*pow(b,2) - x(3)*pow(a,2) ;
+  DF(4,3) = x(2) - (x(2) - x(0))*pow(a,2) ;
+  DF(4,4) = 0 ;
+  DF(4,5) = 0 ;
+
+  DF(5,0) = (x(5) + h)*pow(c,2) ;
+  DF(5,1) = -x(4)*pow(d,2) ;
+  DF(5,2) = 0 ;
+  DF(5,3) = 0 ;
+  DF(5,4) = (x(5) - x(1))*pow(d,2) - (x(5) + h)*pow(c,2) ;
+  DF(5,5) = x(4)*pow(d,2) - (x(4) - x(0))*pow(c,2) ;
 }
 
 
 int main() {
   /*** Define problem parameters ***/
-  int n=2, maxIter=10, iter=0 ;  
+  int n=6, maxIter=10, iter=0 ;  
   double tol=1e-6 ;
   vector x(n) ;
-  x(0) = -0.2 ; x(1) = 0.5 ; //initial guess
+  x(0) = 2.5 ; // ~ One radii right of origin.
+  x(1) = -2.5 ; // ~ One radii beneath origin.
+  x(2) = 2.5 ; // ~ One r right of origin.
+  x(3) = 0.0 ; // almost at axis.
+  x(4) = 0.0 ; // " " "
+  x(5) = -2.5 ; // One radii beneath origin.
+
+      -0.2 ; x(1) = 0.5 ; //initial guess
 
   /*** Print problem info ***/
   cout << setprecision(10) ;
@@ -84,4 +132,3 @@ int main() {
  
   return 0; //terminate main program
 }
-
