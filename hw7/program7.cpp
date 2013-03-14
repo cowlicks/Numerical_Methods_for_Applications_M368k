@@ -108,11 +108,9 @@ int main() {
   x(0) = 2.5 ; // ~ One radii right of origin.
   x(1) = -2.5 ; // ~ One radii beneath origin.
   x(2) = 2.5 ; // ~ One r right of origin.
-  x(3) = 0.0 ; // almost at axis.
-  x(4) = 0.0 ; // " " "
-  x(5) = -2.5 ; // One radii beneath origin.
-
-      -0.2 ; x(1) = 0.5 ; //initial guess
+  x(3) = -0.5 ; // almost at axis.
+  x(4) = 0.5 ; // " " "
+  x(5) = -3.0 ; // One radii beneath origin.
 
   /*** Print problem info ***/
   cout << setprecision(10) ;
