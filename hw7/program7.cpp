@@ -105,12 +105,12 @@ int main() {
   int n=6, maxIter=10, iter=0 ;  
   double tol=1e-6 ;
   vector x(n) ;
-  x(0) = 2.5 ; // ~ One radii right of origin.
-  x(1) = -2.5 ; // ~ One radii beneath origin.
-  x(2) = 2.5 ; // ~ One r right of origin.
-  x(3) = -0.5 ; // almost at axis.
-  x(4) = 0.5 ; // " " "
-  x(5) = -3.0 ; // One radii beneath origin.
+  x(0) = 3.5 ; 
+  x(1) = -3.2 ; 
+  x(2) = 2.3 ; 
+  x(3) = -1.1 ; 
+  x(4) = 1.0 ; 
+  x(5) = -3.3 ; 
 
   /*** Print problem info ***/
   cout << setprecision(10) ;
