@@ -87,7 +87,7 @@ void DFeval(vector& x, matrix& DF){
   DF(4,0) = x(3)*pow(a,2) ;
   DF(4,1) = -x(2)*pow(b,2) ;
   DF(4,2) = (x(3) - x(1))*pow(b,2) - x(3)*pow(a,2) ;
-  DF(4,3) = x(2) - (x(2) - x(0))*pow(a,2) ;
+  DF(4,3) = x(2)*pow(b,2) - (x(2) - x(0))*pow(a,2) ;
   DF(4,4) = 0 ;
   DF(4,5) = 0 ;
 
