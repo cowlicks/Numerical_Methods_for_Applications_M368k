@@ -44,7 +44,7 @@ void Feval(vector& x, vector& F){
   double pi=4.0*atan(1.0) ; //the number pi
 
   F(0) = pow(x(2),2) / pow(a,2) + pow(x(3), 2) / pow(b,2) - 1.0 ; 
-  F(1) = pow(x(4),2) / pow(c,2) + pow(x(5) + h,2) / pow(d,2) ;
+  F(1) = pow(x(4),2) / pow(c,2) + pow(x(5) + h,2) / pow(d,2) - 1.0;
   F(2) = pow(x(2) - x(0),2) + pow(x(3) - x(1),2) - pow(r,2) ;
   F(3) = pow(x(4) - x(0),2) + pow(x(5) - x(1),2) - pow(r,2) ;
   F(4) = x(2)*(x(3) - x(1))*pow(b,2) - x(3)*(x(2) - x(0))*pow(a,2) ;
@@ -55,6 +55,8 @@ void Feval(vector& x, vector& F){
 void DFeval(vector& x, matrix& DF){
   double a=3.0, b=1.5, c=1.0, d=2.0, h=3.5, r=2.5 ; //define any constants
   double pi=4.0*atan(1.0) ; //the number pi
+
+  DF=0 ;
 
   DF(0,0) = 0 ;
   DF(0,1) = 0 ;
@@ -70,15 +72,15 @@ void DFeval(vector& x, matrix& DF){
   DF(1,4) = 2*x(4)/pow(c,2) ;
   DF(1,5) = 2*(x(5) + h)/pow(d,2) ;
 
-  DF(2,0) = 2*(x(2) - x(0)) ;
-  DF(2,1) = 2*(x(3) - x(1)) ; 
+  DF(2,0) = -2*(x(2) - x(0)) ;
+  DF(2,1) = -2*(x(3) - x(1)) ; 
   DF(2,2) = 2*(x(2) - x(0)) ; 
   DF(2,3) = 2*(x(3) - x(1)) ; 
   DF(2,4) = 0 ;
   DF(2,5) = 0 ;
 
-  DF(3,0) = 2*(x(4) - x(0)) ;
-  DF(3,1) = 2*(x(5) - x(1)) ;
+  DF(3,0) = -2*(x(4) - x(0)) ;
+  DF(3,1) = -2*(x(5) - x(1)) ;
   DF(3,2) = 0 ;
   DF(3,3) = 0 ;
   DF(3,4) = 2*(x(4) - x(0)) ;
@@ -102,7 +104,7 @@ void DFeval(vector& x, matrix& DF){
 
 int main() {
   /*** Define problem parameters ***/
-  int n=6, maxIter=10, iter=0 ;  
+  int n=6, maxIter=20, iter=0 ;  
   double tol=1e-6 ;
   vector x(n) ;
   x(0) = 3.5 ; 
