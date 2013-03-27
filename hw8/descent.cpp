@@ -69,11 +69,12 @@ int descent(vector& xk, int n, int maxIter,
     a3 = 0 ; y3 = 0 ;
     ahh = ah ; ghh = gh ; xhh = xh ;
 
+    a1 = 0      ; geval(scaleVec(a1, xh), y1) ;
+    a2 = ah/2   ; geval(scaleVec(a2, xh), y2) ;
+    a3 = ah     ; geval(scaleVec(a3, xh), y3) ;
 
-    /*** compute quadratic interpolation quantities
-         (using notation from class notes) a1,y1, 
-         a2,y2, a3,y3 and ahh,xhh,ghh here ***/
-
+    ahh =   0.5*(a1*a1*(y2-y3) + a2*a2*(y3-y1) + a3*a3*(y1-y2)) /
+                (a1*(y2-y3) + a2*(y3-y1) + a3*(y1-y2)) ;
 
     if(ahh>=0 && ahh<=ah && ghh<gh){
       xk = xhh ;
