@@ -48,20 +48,37 @@ int descent(vector&, int, int, double, int, double) ;
 
 /*** Define g function for problem ***/
 void geval(vector& x, double& g){
-  double a=1, b=-0.1 ; //define any constants
-  double pi=4.0*atan(1.0) ; //the number pi
+  double r, t, y, z ;
+  double a=1, b=1.5, L=0.7 ; //define any constants
+  r = x(0) ;
+  t = x(1) ;
 
-  g = a + b*x(0)*x(1) + x(0)*x(0) + x(1)*x(1) ;
+  y = pow(L*cos(t),2) + pow(r - L*sin(t),2) ;
+  z = pow(L*cos(t),2) + pow(r + L*sin(t),2) ;
+
+  g = pow(a/y,2) - 2*a/y + pow(b/z,2) - 2*b/z ;
 }
 
 
 /*** Define dg function (gradient) for problem ***/
 void dgeval(vector& x, vector& dg){
-  double a=1, b=-0.1 ; //define any constants
-  double pi=4.0*atan(1.0) ; //the number pi
+  double r, t, y, z, dydr, dzdr, dydt, dzdt;
+  double a=1, b=1.5, L=0.7 ; //define any constants
+  r = x(0) ;
+  t = x(1) ;
 
-  dg(0) = b*x(1) + 2*x(0) ;
-  dg(1) = b*x(0) + 2*x(1) ;
+  y = pow(L*cos(t),2) + pow(r - L*sin(t),2) ;
+  z = pow(L*cos(t),2) + pow(r + L*sin(t),2) ;
+  
+  dydr = 2*(r - L*sin(t)) ;
+  dzdr = 2*(r + L*sin(t)) ;
+  dydt = -2*L*L*cos(t)*sin(t) + 2*(r - L*sin(t))*(-L*cos(t)) ;
+  dzdt = -2*L*L*cos(t)*sin(t) + 2*(r + L*sin(t))*(L*cos(t)) ;
+
+  dg(0) =  -2*a*a*dydr/pow(y, 3) + 2*a*dydr/pow(y, 2) - 
+            2*b*b*dzdr/pow(z, 3) + 2*b*dzdr/pow(z, 2) ;
+  dg(1) =  -2*a*a*dydt/pow(y, 3) + 2*a*dydt/pow(y, 2) - 
+            2*b*b*dzdr/pow(z, 3) + 2*b*dzdr/pow(z, 2) ;
 }
 
 
@@ -70,7 +87,7 @@ int main() {
   int n=2, maxIter=100, iter=0, maxSrch=20 ;
   double tol=1e-6, a0=0.2, g ;
   vector x(n) ;
-  x(0) = 1.0 ; x(1) = 0.3 ; //initial guess
+  x(0) = 3.0 ; x(1) = 1.0 ; //initial guess
 
   /*** Print problem info ***/
   cout << setprecision(10) ;

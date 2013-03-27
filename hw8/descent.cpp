@@ -43,6 +43,8 @@ int descent(vector& xk, int n, int maxIter,
   double gk, dgkNorm ;
   double a1, a2, a3, y1, y2, y3, ah, gh, ahh, ghh ;
   vector dgk(n), xh(n), xhh(n) ;
+  vector xh1(n), xh2(n), xh3(n) ;
+
 
   geval(xk,gk) ; //evaluate g(xk)
   dgeval(xk,dgk) ;  //evaluate dg(xk)
@@ -69,12 +71,16 @@ int descent(vector& xk, int n, int maxIter,
     a3 = 0 ; y3 = 0 ;
     ahh = ah ; ghh = gh ; xhh = xh ;
 
-    a1 = 0      ; geval(scaleVec(a1, xh), y1) ;
-    a2 = ah/2   ; geval(scaleVec(a2, xh), y2) ;
-    a3 = ah     ; geval(scaleVec(a3, xh), y3) ;
+
+    a3 = ah     ; xh1 = scaleVec(a3, xh)     ; geval(xh1, y3) ;
+    a2 = ah*.5  ; xh2 = scaleVec(a2, xh)     ; geval(xh2, y2) ;
+    a1 = 0      ; xh3 = scaleVec(a1, xh)     ; geval(xh3, y1) ;
 
     ahh =   0.5*(a1*a1*(y2-y3) + a2*a2*(y3-y1) + a3*a3*(y1-y2)) /
                 (a1*(y2-y3) + a2*(y3-y1) + a3*(y1-y2)) ;
+
+    xhh = scaleVec(ahh, xh) ;
+    geval(xhh, ghh) ;
 
     if(ahh>=0 && ahh<=ah && ghh<gh){
       xk = xhh ;
