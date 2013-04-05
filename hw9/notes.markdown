@@ -46,7 +46,7 @@ which gives:
 * `v = 4*(x+1)*(y+1)*exp(-(x+1)**2 - (y+1)**2) + 2*(x-1)*(y-1)*exp(-(x-1)**2 - (y-1)**2)`
 * `w = -2*exp(-(x+1)**2 - (y+1)**2) + 4*(y+1)**2 * exp(-(x+1)**2 - (y-1)**2) - exp(-(x-1)**2 - (y-1)**2) + 2*(y-1)**2 * exp(-(x-1)**2 - (y-1)**2)`
 
-### Path 0
+## Path 0
 Output:
 
     Newton-RK4: initial t = 0.7499
@@ -83,7 +83,7 @@ Output:
     x =   2.7   y =     1.782   
     x =     3   y =         2   
 
-# Path 1
+## Path 1
 Output:
 
     Newton-RK4: initial t = 0.9622
