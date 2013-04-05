@@ -49,25 +49,45 @@ void feval(const double& x, const double& y,
                               const double& yp, double& f){
   double M=0.2, L=1.3, R=-0.6 ; //define any constants
   double pi=4.0*atan(1.0) ; //the number pi
+  double p, q, u, v, w ;
 
-  f = M*pi + L*y*cos(x) + R*yp*yp ;
+  p = -2*(x-1)*exp(-pow(x+1,2) - pow(y+1,2)) - (x-1)*exp(-pow(x-1,2) - pow(y-1,2)) ;
+  q = -2*(y-1)*exp(-pow(x+1,2) - pow(y+1,2)) - (y-1)*exp(-pow(x-1,2) - pow(y-1,2)) ;
+  u = -2*exp(-pow(x+1,2) - pow(y+1,2)) + 4*pow(x-1,2)*exp(-pow(x+1,2) - pow(y+1,2)) - exp(-pow(x-1, 2) - pow(y-1, 2)) + 2*pow(x-1,2) * exp(-pow(x-1,2) - pow(y-1,2)) ;
+  v = 4*(x+1)*(y+1)*exp(-pow(x+1,2) - pow(y+1,2)) + (x-1)*(y-1)*exp(-pow(x-1,2) - pow(y-1,2)) ;
+  w = -2*exp(-pow(x+1,2) - pow(y+1,2)) + 4*pow(y-1,2)*exp(-pow(x+1,2) - pow(y+1,2)) - exp(-pow(x-1, 2) - pow(y-1, 2)) + 2*pow(y-1,2) * exp(-pow(x-1,2) - pow(y-1,2)) ;
+
+  f = (p*yp - q)*(u + 2*v*yp + w*yp*yp) / (1 + pow(p, 2) + pow(q, 2)) ;
+}
+
+double pathLength(vector x, vector y) {
+    int N = 20; // Vector length
+    double sum = 0 ;
+    for(int i=1; i<N+1; i++){
+        sum += sqrt((x(i)-x(i-1))*(x(i)-x(i-1)) + (y(i)-y(i-1))*(y(i)-y(i-1))) ;
+    }
+    return sum ;
 }
 
 
 int main() {
   /*** Define problem parameters ***/
   double tol=1e-6 ;
-  int N=20, maxIter=10, iter ;  
-  double a=0, b=1, alpha=0, beta=2, t ; 
+  int N=20, maxIter=200, iter ;  
+  double a=-3.0, b=3.0, alpha=-2.0, beta=2.0, t , dist ;
   vector x(N+1), y(N+1) ; 
-  t=2.0 ; // initial guess of slope 
+  t=0.9622 ; // initial guess of slope 
 
   /*** Call Newton-RK4 method ***/
   cout << setprecision(8) ;
   iter=shootRK4(N,a,b,alpha,beta,t,maxIter,tol,x,y) ;
 
+  dist=pathLength(x, y) ;  
+  
   /*** Print results to screen ***/
   cout << setprecision(4) ;
+  cout << "Pathlength: " << dist << endl ;
+  cout << endl ;
   cout << "Number of Newton iterations: " << iter << endl ;
   cout << "Approx solution: t = " << t << endl ;
   cout << "Approx solution: x_j, y_j =  " << endl ;
