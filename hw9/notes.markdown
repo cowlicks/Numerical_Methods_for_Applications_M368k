@@ -49,6 +49,49 @@ which gives:
 ## Path 0
 Output:
 
+    Newton-RK4: initial t = 0.9622
+    Newton-RK4: |F| = 15.855098
+    Newton-RK4: |F| = 0.060912889
+    Newton-RK4: |F| = 0.012256896
+    Newton-RK4: |F| = 0.0023936383
+    Newton-RK4: |F| = 0.00047023003
+    Newton-RK4: |F| = 9.226944e-05
+    Newton-RK4: |F| = 1.8109425e-05
+    Newton-RK4: |F| = 3.5541277e-06
+    Newton-RK4: |F| = 6.9752418e-07
+    Newton-RK4: soln converged
+
+    Pathlength: 10.05
+
+    Number of Newton iterations: 8
+    Approx solution: t = 0.9622
+    Approx solution: x_j, y_j =  
+    x =    -3   y =        -2   
+    x =  -2.7   y =     -1.71   
+    x =  -2.4   y =    -1.396   
+    x =  -2.1   y =   -0.7811   
+    x =  -1.8   y =     2.849   
+    x =  -1.5   y =     2.798   
+    x =  -1.2   y =     2.747   
+    x =  -0.9   y =     2.696   
+    x =  -0.6   y =     2.645   
+    x =  -0.3   y =     2.595   
+    x =-3.331e-16   y =     2.544   
+    x =   0.3   y =     2.493   
+    x =   0.6   y =     2.443   
+    x =   0.9   y =     2.392   
+    x =   1.2   y =     2.339   
+    x =   1.5   y =     2.284   
+    x =   1.8   y =     2.227   
+    x =   2.1   y =     2.169   
+    x =   2.4   y =     2.112   
+    x =   2.7   y =     2.056   
+    x =     3   y =         2   
+
+
+## Path 1
+Output:
+
     Newton-RK4: initial t = 0.7499
     Newton-RK4: |F| = 0.039169904
     Newton-RK4: |F| = 0.00041358139
@@ -56,7 +99,7 @@ Output:
     Newton-RK4: |F| = 3.4177909e-09
     Newton-RK4: soln converged
 
-    Pathlength: 7.23
+    Pathlength: 7.678
 
     Number of Newton iterations: 3
     Approx solution: t = 0.7499
@@ -98,7 +141,7 @@ Output:
     Newton-RK4: |F| = 6.9752418e-07
     Newton-RK4: soln converged
 
-    Pathlength: 10.05
+    Pathlength: 10.1
 
     Number of Newton iterations: 8
     Approx solution: t = 0.9622

@@ -60,11 +60,17 @@ void feval(const double& x, const double& y,
   f = (p*yp - q)*(u + 2*v*yp + w*yp*yp) / (1 + pow(p, 2) + pow(q, 2)) ;
 }
 
+double zeval(double x, double y) {
+    double z ;
+    z = exp(-pow(x+1,2)-pow(y+1,2)) + .5*exp(-pow(x-1,2)-pow(y-1,2)) ;
+    return z ;
+}
+
 double pathLength(vector x, vector y) {
     int N = 20; // Vector length
     double sum = 0 ;
     for(int i=1; i<N+1; i++){
-        sum += sqrt((x(i)-x(i-1))*(x(i)-x(i-1)) + (y(i)-y(i-1))*(y(i)-y(i-1))) ;
+        sum += sqrt((x(i)-x(i-1))*(x(i)-x(i-1)) + (y(i)-y(i-1))*(y(i)-y(i-1)) + pow((zeval(x(i), y(i))-zeval(x(i-1), y(i-1))),2)) ;
     }
     return sum ;
 }
@@ -76,7 +82,7 @@ int main() {
   int N=20, maxIter=200, iter ;  
   double a=-3.0, b=3.0, alpha=-2.0, beta=2.0, t , dist ;
   vector x(N+1), y(N+1) ; 
-  t=0.9622 ; // initial guess of slope 
+  t=0.7499 ; // initial guess of slope 
 
   /*** Call Newton-RK4 method ***/
   cout << setprecision(8) ;
