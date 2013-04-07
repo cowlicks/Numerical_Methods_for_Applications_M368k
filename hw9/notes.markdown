@@ -56,7 +56,7 @@ Output:
     Newton-RK4: |F| = 3.4177909e-09
     Newton-RK4: soln converged
 
-    Pathlength: 7.23
+    Pathlength: 7.678
 
     Number of Newton iterations: 3
     Approx solution: t = 0.7499
@@ -98,7 +98,7 @@ Output:
     Newton-RK4: |F| = 6.9752418e-07
     Newton-RK4: soln converged
 
-    Pathlength: 10.05
+    Pathlength: 10.1
 
     Number of Newton iterations: 8
     Approx solution: t = 0.9622
