@@ -90,8 +90,8 @@ void BVPeval(const double& x, double& p, double& q,
   dg = (betaBC-alphaBC)/(b-a) ;
 
   p = peval(x) ;
-  q = qeval(x, 0.) ;
-  f = feval(x, 50.) ;
+  q = qeval(x, 100.) ;
+  f = feval(x, 550.) ;
 }
 
 
@@ -113,9 +113,6 @@ int main() {
   prt.setf(ios::fixed) ;
   prt << setprecision(5) ;
   cout << "Linear-FE: output written to " << myfile << endl ;
-  prt << "Linear-FE results" << endl ;
-  prt << "Number of interior grid pts: N = " << N << endl ;
-  prt << "Approximate solution: x_j, y_j" << endl ;
   for(int j=0; j<=N+1; j++){
     prt << setw(8) << x(j) ;
     prt << "   " ;
