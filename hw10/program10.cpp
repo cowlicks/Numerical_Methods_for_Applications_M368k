@@ -56,28 +56,50 @@ ofstream prt(myfile) ;
 /*** Declare external function ***/
 int linearfem(int, vector&, vector&) ; 
 
+/*** Functions to help define BVPeval ***/
+double peval(double x){
+    if(x<0){
+        return 0.1;
+    }else{
+        return 0.2;
+    }
+}
+double qeval(double x, double beta){
+    if(fabs(x) <= 0.5){
+        return 0.;
+    }else{
+        return beta;
+    }
+}
+double feval(double x, double gamma){
+    if(fabs(x) <= 0.4){
+        return gamma;
+    }else{
+        return 0.;
+    }
+}
+
 /*** Define p(x), q(x), f(x), g(x), g'(x) ***/
 void BVPeval(const double& x, double& p, double& q, 
                             double& f, double& g, double& dg){
 
   double pi=4.0*atan(1.0) ;
-  double a=0, b=1, alphaBC=0, betaBC=2 ;
+  double a=-2, b=2, alphaBC=0, betaBC=0 ;
 
   g = alphaBC + (x-a)*((betaBC-alphaBC)/(b-a)) ;
   dg = (betaBC-alphaBC)/(b-a) ;
 
-  p = 1 ;
-  q = pi*pi ;
-  f = 2*pi*pi*(sin(pi*x) + x) ;
-
+  p = peval(x) ;
+  q = qeval(x, 0.) ;
+  f = feval(x, 50.) ;
 }
 
 
 int main() {
   /*** Define problem parameters ***/
-  int N=19, success_flag ;  
+  int N=199, success_flag ;  
   vector x(N+2), y(N+2) ;
-  double a=0, b=1, h=(b-a)/(N+1) ;
+  double a=-2, b=2, h=(b-a)/(N+1) ;
 
   /*** Define FE grid pts  ***/
   for(int j=0; j<=N+1; j++){
