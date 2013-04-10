@@ -1,6 +1,6 @@
-# Homework 10 programmings mini-project
+# Homework 10 programming mini-project
 
-## (a)
+## (b)
 
 The maximum temperature occurs at `x = 0.12000` with `u = 243.60000`.
 
