@@ -4,7 +4,7 @@
 
 The maximum temperature occurs at `x = 0.12000` with `u = 243.60000`.
 
-## (b)
+## (c)
 
 The requirements can be met with the choice of `gamma = 550` and ` beta = 100`.
 
