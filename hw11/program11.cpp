@@ -68,32 +68,32 @@ void PDEeval(const double& x, const double& y,
              double& P, double& Q, double& p, double& q,
                                            double& r, double& f){
 
-  P = 1 ;
-  Q = 1 ;
-  p = 0 ;
-  q = x ;
+  P = 0.3 + 0.5*y ;
+  Q = 0.3 + 0.5*y ;
+  p = -(10 -10*x) ;
+  q = -5*y ;
   r = 0 ;
-  f = x*y ;
-
+  f = -10*exp(-30*pow(x-0.2,2) - 30*pow(y-0.2,2)) ;
 }
+
 
 /*** Define ga(y), gb(y), gc(x), gd(x) ***/
 void BCeval(const double& x, const double& y,
             double& ga, double& gb, double& gc, double& gd){
 
-  ga = y ;
-  gb = sqrt(y) ;
+  ga = 0 ;
+  gb = 0 ;
   gc = 0 ;
-  gd = 1 ;
+  gd = 0 ;
 
 }
 
 int main() {
   /*** Define problem parameters ***/
-  int N=9, M=9, success_flag=0 ;  
+  int N=29, M=29, success_flag=0 ;  
   matrix u(N+2,M+2) ;
   vector x(N+2), y(M+2) ; 
-  double a=1, b=2, c=0, d=1 ; 
+  double a=0, b=1, c=0, d=1 ; 
   double dx=(b-a)/(N+1), dy=(d-c)/(M+1) ;
 
 
@@ -114,10 +114,6 @@ int main() {
   prt.setf(ios::fixed) ;
   prt << setprecision(5) ;
   cout << "Linear-CD-2D: output written to " << myfile << endl ;
-  prt << "Linear-CD-2D results" << endl ;
-  prt << "Number of interior x-grid pts: N = " << N << endl ;
-  prt << "Number of interior y-grid pts: M = " << M << endl ;
-  prt << "Approximate solution: x_i, y_j, u_ij" << endl ;
   for(int i=0; i<=N+1; i++){
     for(int j=0; j<=M+1; j++){
       prt << setw(8) << x(i) ;

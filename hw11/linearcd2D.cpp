@@ -76,22 +76,28 @@ void AGeval(int N, int M,
       ll = i + N*(M-j) ; //actual l-label on grid (1...NM)
       l = ll-1 ; //C++ array index (0...NM-1)
 
-      /*** Build the entries of the A-matrix and G-vector here.  
-           A few entries of A are shown as an example.  We use 
-           the more descriptive notation gLeft,gRight,gBottom,
-           gTop in place of ga,gb,gc,gd. ***/
-
       PDEeval(x(i),y(j),P,Q,p,q,r,f) ; //P,Q,p,q,r,f values
       BCeval(x(i),y(j),gLeft,gRight,gBottom,gTop) ; //ga,gb,gc,gd values
 
       al = (dy/dx)*P - (dy/2.0)*p ;
       bl = dx*dy*r - (2.0*dy/dx)*P - (2.0*dx/dy)*Q ;
       cl = (dy/dx)*P + (dy/2.0)*p ;
+      dl = (dy/dx)*Q + (dy/2)*q ;
+      el = (dy/dx)*Q - (dy/2)*q ;
 
+      // G
+      G(l) = dx*dy*f ;
+      if( j==1 ){ G(l) += -gTop    ; }
+      if( i==1 ){ G(l) += -gLeft   ; }
+      if( j==M ){ G(l) += -gRight  ; }
+      if( j==N ){ G(l) += -gBottom ; }
+
+      // A
       if( i>1 ){ A(l,l-1) = al ; }
       A(l,l) = bl ;
       if( i<N ){ A(l,l+1) = cl ; }
-
+      if( j<M ){ A(l,l-N) = dl ; }
+      if( j>1 ){ A(l,l+N) = el ; }
 
     }
   }
