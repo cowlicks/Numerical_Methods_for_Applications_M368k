@@ -73,7 +73,9 @@ void PDEeval(const double& x, const double& y,
   p = -(10 -10*x) ;
   q = -5*y ;
   r = 0 ;
-  f = -10*exp(-30*pow(x-0.2,2) - 30*pow(y-0.2,2)) ;
+  //f = -10*exp(-30*pow(x-0.2,2) - 30*pow(y-0.2,2)) ;
+  //f = -10*exp(-30*pow(x-0.2,2) - 30*pow(y-0.2,2)) - 8*exp(-30*pow(x-0.2,2)-30*pow(y-0.6,2)) ;
+  f = -10*exp(-30*pow(x-0.2,2) - 30*pow(y-0.2,2)) - 8*exp(-30*pow(x-0.8,2)-30*pow(y-0.2,2)) ;
 }
 
 
