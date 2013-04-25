@@ -69,15 +69,14 @@ int fwddiff2D(int, int, double, double, double, double,
 void PDEeval(const double& x, const double& y, double& t,
                     double& P, double& Q, double& p, double& q,
                                           double& r, double& eta){
-
-
-  P = 0.01*(1 + exp(-x*y*t/10)) ; 
-  Q = 0.01 ; 
-  p = 0.02*x*y ; 
-  q = 0.04*x ;
+  P = 0.03 ;
+  Q = 0.03 ; 
+  p = -y ; 
+  q = x ;
   r = 0 ; 
-  eta = 0.01*t + 0.2*x*sin(y) ; 
-
+  eta = 0.6*exp(-30*pow(x-0.2,2) -30*pow(y-0.2,2))
+      - 0.7*exp(-30*pow(x-0.6,2) -30*pow(y-0.2,2))
+      - 0.6*exp(-30*pow(x+0.5,2) -30*pow(y    ,2)) ;
 }
 
 /*** Define ga(y,t), gb(y,t), gc(x,t), gd(x,t) ***/
@@ -85,28 +84,28 @@ void BCeval(const double& x, const double& y, double& t,
             double& ga, double& gb, double& gc, double& gd){
 
 
-  ga = 0 ; 
-  gb = 0 ;
-  gc = 0 ; 
-  gd = 0 ;  
+  ga = 1 ; 
+  gb = 1 ;
+  gc = 1 ; 
+  gd = 1 ;  
 
 }
 
 /*** Define f(x,y) ***/
 void ICeval(const double& x, const double& y, double& f){
 
-  f = 0 ;
+  f = 1 ;
 }
 
 
 int main() {
   /*** Define problem parameters ***/
-  int N=19, M=19, L=50*2, success_flag=0 ;  
+  int N=29, M=29, L=4000, success_flag=0 ;  
   matrix u(N+2,M+2) ;
   vector x(N+2), y(M+2) ; 
-  double a=0, b=1, c=0, d=1 ; 
+  double a=-1, b=1, c=-1, d=1 ; 
   double dx=(b-a)/(N+1), dy=(d-c)/(M+1) ;
-  double T=2, dt=T/L ; 
+  double T=40, dt=T/L ; 
 
   /*** Construct xy-grid ***/
   for(int i=0; i<=N+1; i++){
@@ -141,12 +140,6 @@ int main() {
   prt.setf(ios::fixed) ;
   prt << setprecision(5) ;
   cout << "Fwd-Diff-2D: output written to " << myfile << endl ;
-  prt << "Fwd-Diff-2D results" << endl ;
-  prt << "Number of interior x-grid pts: N = " << N << endl ;
-  prt << "Number of interior y-grid pts: M = " << M << endl ;
-  prt << "Number of time steps: L = " << L << endl ;
-  prt << "Final time of simulation: t = " << t << endl ;
-  prt << "Approximate solution at time t: x_i, y_j, u_ij" << endl ;
   for(int i=0; i<=N+1; i++){
     for(int j=0; j<=M+1; j++){
       prt << setw(8) << x(i) ;

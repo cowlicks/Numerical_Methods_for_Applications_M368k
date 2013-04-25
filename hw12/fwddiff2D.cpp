@@ -90,22 +90,33 @@ int fwddiff2D(int N, int M,
       ahatij = P/(dx*dx) - p/(2.0*dx) ;
       bhatij = r - 2.0*P/(dx*dx) - 2.0*Q/(dy*dy) ;
       chatij = P/(dx*dx) + p/(2.0*dx) ;
-
-
-      if( i>1 ){ 
-        uLeft = u(i-1,j) ; //interior value
-      }
-      else {
-        uLeft = gLeft ; //boundary value
-      }
+      dhatij = Q/(dy*dy) + q/(2.0*dy) ;
+      ehatij = Q/(dy*dy) - q/(2.0*dy) ;
 
       uCenter = u(i,j) ;
 
+      if( i>1 ){ 
+        uLeft = u(i-1,j) ; //interior value
+      } else {
+        uLeft = gLeft ; //boundary value
+      }
+
       if( i<N ){ 
         uRight = u(i+1,j) ; //interior value
-      }
-      else {
+      } else {
         uRight = gRight ; //boundary value
+      }
+
+      if( j>1 ){
+          uBottom = u(i,j-1) ;
+      } else {
+          uBottom = gBottom ;
+      }
+      
+      if( j<M ){
+          uTop = u( i,j+1) ; 
+      } else {
+          uTop = gTop ;
       }
 
 
