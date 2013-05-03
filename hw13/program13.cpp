@@ -71,13 +71,27 @@ void PDEeval(const double& x, const double& y, double& t,
                     double& P, double& Q, double& p, double& q,
                                  double& r, double& s, double& eta){
 
-  P = 0.1*(1 + exp(-x*y*t/10)) ;
-  Q = 0.1 ;
-  p = 0.02*x*y ;
-  q = 0.04*x ;
-  r = 0.01 ;
-  s = 0.05 ;
-  eta = 0.01*t - 0.02*x*sin(y) ;
+  double pi = 4.0*atan(1.0) ;
+  double alpha = 0.3 ;
+  double xs = 1.5, ys = 0 ;
+  double xa = -1., ya = 0., ta = 0.5 ;
+  double w ;
+  P = alpha ;
+  Q = alpha ;
+  p = 0. ;
+  q = 0. ;
+  r = 0. ;
+  eta = 10*exp( -30*pow(x-xa,2)
+                -30*pow(y-ya,2)
+                -30*pow(t-ta,2)
+          ) ;
+
+  w = sqrt(pow(x-xs,2)+0.25*pow(y-ys,2)) ;
+  if( w <= 0.5 ){
+      s = 10*pow(cos(pi*w),2) ;
+  } else {
+      s = 0 ;
+  }
 
 }
 
@@ -85,10 +99,10 @@ void PDEeval(const double& x, const double& y, double& t,
 void BCeval(const double& x, const double& y, double& t,
             double& ga, double& gb, double& gc, double& gd){
 
-  ga = y ; 
-  gb = sqrt(y) ;
+  ga = 0 ; 
+  gb = 0 ;
   gc = 0 ; 
-  gd = x ;  
+  gd = 0 ;  
 
 }
 
@@ -96,20 +110,20 @@ void BCeval(const double& x, const double& y, double& t,
 void ICeval(const double& x, const double& y, 
                                 double& f, double& gamma){
 
-  f = 1 ;
-  gamma = x*y*(1-x)*(1-y) ;
+  f = 0 ;
+  gamma = 0 ;
 
 }
 
 
 int main() {
   /*** Define problem parameters ***/
-  int N=9, M=9, L=50, success_flag=0 ;  
+  int N=119, M=119, L= 210, success_flag=0 ;  
   matrix u(N+2,M+2), uold(N+2,M+2) ;
   vector x(N+2), y(M+2) ; 
-  double a=0, b=1, c=0, d=1 ; 
+  double a=-3, b=3, c=-3, d=3 ; 
   double dx=(b-a)/(N+1), dy=(d-c)/(M+1) ;
-  double T=5, dt=T/L ; 
+  double T=7, dt=T/L ; 
 
   /*** Construct xy-grid ***/
   for(int i=0; i<=N+1; i++){
@@ -145,12 +159,6 @@ int main() {
   prt.setf(ios::fixed) ;
   prt << setprecision(5) ;
   cout << "Ctr-Diff-2D: output written to " << myfile << endl ;
-  prt << "Ctr-Diff-2D results" << endl ;
-  prt << "Number of interior x-grid pts: N = " << N << endl ;
-  prt << "Number of interior y-grid pts: M = " << M << endl ;
-  prt << "Number of time steps: L = " << L << endl ;
-  prt << "Final time of simulation: t = " << t << endl ;
-  prt << "Approximate solution at time t: x_i, y_j, u_ij" << endl ;
   for(int i=0; i<=N+1; i++){
     for(int j=0; j<=M+1; j++){
       prt << setw(8) << x(i) ;
